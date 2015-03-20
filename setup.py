@@ -1,4 +1,11 @@
+import sys
 from setuptools import setup
+
+install_requires = ['distribute']
+if sys.version_info[0] == 2:
+    install_requires.append('suds')
+else:
+    install_requires.append('suds-jurko')
 
 setup(
     name='pycontrol',
@@ -13,7 +20,7 @@ setup(
     keywords='iControl F5 API',
     #py_modules=['pycontrol'],
     packages=['pycontrol',],
-    install_requires=['distribute', 'suds>=0.3.9'],
+    install_requires=install_requires,
     platforms='any',
     classifiers=[
         'Operating System :: OS Independent',

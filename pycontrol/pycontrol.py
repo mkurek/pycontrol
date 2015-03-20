@@ -39,7 +39,10 @@ for more information on Suds. We thank Jeff for his excellent work!
 """
 
 import logging
-from urllib import pathname2url
+try:
+    from urllib import pathname2url
+except ImportError:
+    from urllib.request import pathname2url
 import platform
 from suds.client import Client
 from suds.xsd.doctor import Import, ImportDoctor
@@ -303,7 +306,7 @@ class InterfaceInstance(object):
 def main():
     import sys
     if len(sys.argv) < 4:
-        print "Usage: %s <hostname> <username> <password>"% sys.argv[0]
+        print("Usage: %s <hostname> <username> <password>"% sys.argv[0])
         sys.exit()
 
     a = sys.argv[1:]
@@ -316,10 +319,10 @@ def main():
 
     pools = b.LocalLB.Pool.get_list()
     version = b.LocalLB.Pool.get_version()
-    print "Version is: %s\n" % version
-    print "Pools:"
+    print("Version is: %s\n" % version)
+    print("Pools:")
     for x in pools:
-        print "\t%s" % x
+        print("\t%s" % x)
 
 if __name__ == '__main__':
     main()
